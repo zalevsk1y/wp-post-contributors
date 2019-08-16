@@ -27,7 +27,7 @@ tools:
         timeout: 600
         runs: 3
  nodes:
-        analysis:
-            dependencies:
-                before:
-                    - composer require --dev johnpbloch/wordpress
+    analysis:
+        dependencies:
+            before:
+                - composer require --dev johnpbloch/wordpress
