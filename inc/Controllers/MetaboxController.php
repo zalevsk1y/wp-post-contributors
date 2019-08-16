@@ -4,7 +4,7 @@ namespace ContributorsPlugin\Controllers;
 use ContributorsPlugin\View\TemplateRender;
 
 class MetaboxController
-{
+{   protected $postTemplate;
     protected $adminTemplate;
     public function __construct(TemplateRender $adminTemplate,TemplateRender $postTemplate)
     {
