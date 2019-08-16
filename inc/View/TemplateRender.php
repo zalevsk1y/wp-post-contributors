@@ -26,6 +26,7 @@ class TemplateRender
      *
      * @return void
      */
+    
     public function render(array $args = [])
     {
         if (count($this->args) > 0) {

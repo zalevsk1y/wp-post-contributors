@@ -7,7 +7,7 @@
             <?php endforeach; ?>
         <?php endif; ?>
     </select>
-    <button type="button" class="button tagadd" id="add-contributor">Add</button>
+    <button type="button" class="button tag-add" id="add-contributor">Add</button>
 </div>
 <ul class='contributors-list' id='editable-contributors-list'>
 <?php if(isset($contributors)):?>
