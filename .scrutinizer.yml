@@ -26,8 +26,9 @@ tools:
     external_code_coverage:
         timeout: 600
         runs: 3
- nodes:
-    analysis:
-        dependencies:
-            before:
-                - composer require --dev johnpbloch/wordpress
+build:
+    nodes:
+        analysis:
+            dependencies:
+                before:
+                    - composer require --dev johnpbloch/wordpress
