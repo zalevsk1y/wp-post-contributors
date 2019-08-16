@@ -23,8 +23,8 @@ checks:
         fix_identation_4spaces: true
         fix_doc_comments: true
 
-build:
-    tests:
-        override:
-            command: "php -v"
+tools:
+    external_code_coverage:
+        timeout: 600
+        runs: 3
 
