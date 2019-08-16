@@ -7,8 +7,16 @@
 	convertNoticesToExceptions="true"
 	convertWarningsToExceptions="true"
 	>
+	<filter>
+  		<whitelist processUncoveredFilesFromWhitelist="true">
+			<directory suffix=".php">inc/</directory>
+			<exclude>
+				<directory suffix=".php">inc/Core</directory>
+			</exclude>
+  		</whitelist>
+	</filter>
 	<testsuites>
-		<testsuite>
+		<testsuite name="my-gallery-models">
 			<directory prefix="test-" suffix=".php">./tests/</directory>
 			<exclude>./tests/test-sample.php</exclude>
 		</testsuite>
