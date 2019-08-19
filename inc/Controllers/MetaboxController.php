@@ -91,7 +91,7 @@ class MetaboxController
         $args = array('authors' => get_users('orderby=nicename'));
         if (!empty($contributorsIds)) {
             $contributorsIds = explode(',', $contributorsIds);
-            $args['contributors'] = $this->getContributorsData($args['authors'], $contributorsIds);
+            $args['contributors'] = $this->getContributorsData($contributorsIds);
         }
 
         wp_nonce_field(CONTRIBUTORS_PLUGIN_NONCE_ACTION, CONTRIBUTORS_PLUGIN_NONCE);
