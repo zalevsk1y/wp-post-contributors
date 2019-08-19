@@ -3,7 +3,8 @@
 namespace ContributorsPlugin\View;
 
 /**
- * Class loading template file and render it with args.
+ * Class loading template file and render it with args. Args is not is not escaping, 
+ * so please escape them in template or before passing to TemplateRender
  *
  * @author  Evgeniy S.Zalevskiy <2600@ukr.net>
  * @license MIT https://opensource.org/licenses/MIT
