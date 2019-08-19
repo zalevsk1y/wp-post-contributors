@@ -3,6 +3,14 @@ namespace ContributorsPlugin\Controllers;
 
 use ContributorsPlugin\View\TemplateRender;
 
+/**
+ * Class manage metabox functions 
+ *
+ * @package Menu
+ * @author  Evgeniy S.Zalevskiy <2600@ukr.net>
+ * @license MIT
+ */
+
 class MetaboxController
 {   protected $postTemplate;
     protected $adminTemplate;
@@ -12,11 +20,23 @@ class MetaboxController
         $this->postTemplate = $postTemplate;
         $this->addActions();
     }
+    /**
+     * Add WP actions 
+     *
+     * @return void
+     */
     public function addActions()
     {
         \add_action('save_post', array($this, 'saveMetaData'));
         \add_action('the_content',array($this,'renderPost'));
+        \add_action('add_meta_boxes', array($this, 'addContributorsBox'));
     }
+    /**
+     *  Save contributors data to post meta
+     *
+     * @param int $post_id 
+     * @return void
+     */
     public function saveMetaData($post_id)
     {
         if (!$this->havePermission($post_id)) {
@@ -36,6 +56,12 @@ class MetaboxController
             }
         }
     }
+    /**
+     * Check if user have permission to modify post 
+     *
+     * @param int $post_id
+     * @return bool
+     */
     protected function havePermission($post_id)
     {
         if (!isset($_POST[CONTRIBUTORS_PLUGIN_NONCE])) {
@@ -53,6 +79,12 @@ class MetaboxController
         return true;
 
     }
+    /**
+     * Render view for post-edit page that allow to add and remove contributors
+     *
+     * @param int $post
+     * @return void
+     */
     public function renderPostContributorsBox($post)
     {
         $contributorsIds = get_post_meta($post->ID, CONTRIBUTORS_PLUGIN_META, true);
@@ -66,20 +98,50 @@ class MetaboxController
 
         echo $this->adminTemplate->render($args);
     }
-    protected function getContributorsData(array $authors, array $contributorsId = array(1))
+    /**
+     * Add metabox "Contributors" to "post_author_meta".Used in add action 
+     *
+     * @return void
+     */
+    public function addContributorsBox()
+    {
+        add_meta_box(
+            'post_author_meta',
+            __('Contributors'),
+            array($this, 'renderPostContributorsBox'),
+            'post',
+            'side',
+            'high'
+        );
+    }
+
+    /**
+     * Get contributors nickname by id
+     *
+     * @param array $contributorsId  array of user ids that marked as contributors
+     * @return array of stdClass objects with contributors id and nickname
+     */
+
+    protected function getContributorsData( $contributorsId)
     {
         $contributors = array();
-        foreach ($authors as $author) {
-            if (in_array($author->ID, $contributorsId)) {
+        foreach ($contributorsId as $id) {
+            $user=\get_userdata(intval($id));
+            if ($user) {
                 $contributors[] = (object) array(
-                    'ID' => $author->ID,
-                    'nickname' => $author->nickname,
-
+                    'ID' => $user->ID,
+                    'nickname' => $user->nickname,
                 );
             }
         }
         return $contributors;
     }
+    /**
+     * Render contributors list to add to the post content
+     *
+     * @param string $content post content
+     * @return string
+     */
     public function renderPost($content){
         global $post;
         $meta_data = get_post_meta( $post->ID, CONTRIBUTORS_PLUGIN_META, true );

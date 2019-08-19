@@ -33,4 +33,4 @@ $modules = [];
 $modules["adminTemplate"] = new View\TemplateRender($adminTemplatePath);
 $modules["postTemplate"] = new View\TemplateRender($postTemplatePath);
 $modules["metabox"] = new Controllers\MetaboxController($modules["adminTemplate"], $modules["postTemplate"]);
-$modules["main"] = new Core\Main($modules["metabox"]);
+$modules["main"] = new Core\Main();

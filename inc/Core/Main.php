@@ -1,23 +1,40 @@
 <?php
 namespace ContributorsPlugin\Core;
 
-use ContributorsPlugin\Controllers\MetaboxController;
+/**
+ * Class add
+ *
+ * @package Menu
+ * @author  Evgeniy S.Zalevskiy <2600@ukr.net>
+ * @license MIT
+ */
 
 class Main
 {
     protected $sreen = 'post';
     protected $metabox;
-    public function __construct(MetaboxController $metabox)
+    public function __construct()
     {
-        $this->metabox = $metabox;
+
         $this->addActions();
 
     }
+    /**
+     * Add wp action hook
+     *
+     * @return void
+     */
     protected function addActions()
     {
-        add_action('add_meta_boxes', array($this, 'addContributorsBox'));
+
         add_action('admin_enqueue_scripts', array($this, 'setStyles'));
     }
+    /**
+     * Add styles 
+     *
+     * @param string $hook 
+     * @return void
+     */
     public function setStyles($hook)
     {
         if ($hook == 'post.php') {
@@ -28,17 +45,5 @@ class Main
         }
 
     }
-    public function addContributorsBox()
-    {
-        add_meta_box(
-            'post_author_meta',
-            __('Contributors'),
-            array($this->metabox, 'renderPostContributorsBox'),
-            'post',
-            'side',
-            'high'
-        );
-    }
-    
 
 }

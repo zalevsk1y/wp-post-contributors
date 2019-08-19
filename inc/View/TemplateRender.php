@@ -12,7 +12,13 @@ class TemplateRender
 {
     protected $path;
     protected $args;
-    public function __construct(string $template_path, array $args = [])
+    /**
+     * Init function 
+     *
+     * @param string $template_path path to template 
+     * @param array $args array of args that need to be add to template
+     */
+    public function __construct($template_path,$args = [])
     {
         if (!file_exists($template_path)) {
             throw new \Exception('Cannot load template file ' . $template_path);
@@ -23,11 +29,11 @@ class TemplateRender
     /**
      * Render template.
      *
-     *
+     * @param array $args array of args that need to be add to template
      * @return void
      */
     
-    public function render(array $args = [])
+    public function render($args = [])
     {
         if (count($this->args) > 0) {
             foreach ($this->args as $key => $item) {
