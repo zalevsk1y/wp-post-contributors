@@ -21,7 +21,7 @@ This will download the latest developer copy of wp-post-contributors.
 ## How to use NewsParserPlugin\this plugin?
 
 Select from dropdown list of registered users, one or several users in "Contributors" metabox and save the post. Get to the post preview page and you will see user marked by you as contributors at the bottom of the post.
-If you would like delete user from contributor list enter to the 'Edit Post' section and press cross in front of user nickname in 'Contributor' metabox. That will remove user name from the contributors list.Save your post. And check out out changes at preview page :smile:. 
+If you would like delete user from contributor list enter to the 'Edit Post' section and press cross in front of user nickname in 'Contributor' metabox. That will remove user name from the contributors list.Save your post. And check out changes at preview page :smile:. 
 
 
 ## Bugs ##
