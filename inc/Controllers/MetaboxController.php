@@ -93,9 +93,7 @@ class MetaboxController
             $contributorsIds = explode(',', $contributorsIds);
             $args['contributors'] = $this->getContributorsData($contributorsIds);
         }
-
-        wp_nonce_field(CONTRIBUTORS_PLUGIN_NONCE_ACTION, CONTRIBUTORS_PLUGIN_NONCE);
-
+        
         echo $this->adminTemplate->render($args);
     }
     /**
@@ -122,7 +120,7 @@ class MetaboxController
      * @return array of stdClass objects with contributors id and nickname
      */
 
-    protected function getContributorsData( $contributorsId)
+    protected function getContributorsData($contributorsId)
     {
         $contributors = array();
         foreach ($contributorsId as $id) {

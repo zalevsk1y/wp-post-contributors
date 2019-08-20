@@ -1,5 +1,5 @@
 <div class='input-group'>
-<?php echo wp_nonce_field(CONTRIBUTORS_PLUGIN_NONCE_ACTION, CONTRIBUTORS_PLUGIN_NONCE); ?>
+
     <select class="custom-select" id='selector-contributors'>
         <option value='-1'>Select contributor...</option>
         <?php if(isset($authors)&&count($authors)>0): 
