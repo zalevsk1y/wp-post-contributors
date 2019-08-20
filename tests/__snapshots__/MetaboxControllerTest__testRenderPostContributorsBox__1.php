@@ -3,10 +3,10 @@
     <select class="custom-select" id=\'selector-contributors\'>
         <option value=\'-1\'>Select contributor...</option>
                         <option data-avatar=""value=1>admin</option>
-                            <option data-avatar=""value=6>User 23</option>
-                            <option data-avatar=""value=7>User 24</option>
-                            <option data-avatar=""value=8>User 25</option>
-                            <option data-avatar=""value=9>User 26</option>
+                            <option data-avatar=""value=6>administrator</option>
+                            <option data-avatar=""value=7>author</option>
+                            <option data-avatar=""value=8>contributor</option>
+                            <option data-avatar=""value=9>subscriber</option>
                         </select>
     <button type="button" class="button tag-add" id="add-contributor">Add</button>
 </div>
@@ -17,7 +17,7 @@
                     <span class=\'fo fo-close\' >
                 </li>
                         <li data-id=6>
-                    <span class="contributor-nickname">User 23</span>
+                    <span class="contributor-nickname">administrator</span>
                     <input type="hidden" name=wp_contributors_plugin_value[] value=6>
                     <span class=\'fo fo-close\' >
                 </li>

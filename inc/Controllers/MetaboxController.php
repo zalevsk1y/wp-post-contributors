@@ -150,13 +150,13 @@ class MetaboxController
      * @return string
      */
     public function renderPost($content){
-        global $post;
-        $meta_data = get_post_meta( $post->ID, CONTRIBUTORS_PLUGIN_META, true );
+        $meta_data = get_post_meta(get_the_ID() , CONTRIBUTORS_PLUGIN_META, true );
         if($meta_data == '') return $content;
         $contributors = explode( ",", $meta_data );
         $user_data=[];
         foreach ($contributors as $contributor){
             $contributor_data =get_userdata( $contributor );
+            if(!$contributor_data) continue;
             $user_data[] =(object)array(
               'nickname'=>esc_html( $contributor_data->nickname ),
                'link'=>esc_url(get_author_posts_url( $contributor_data->ID )),

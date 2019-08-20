@@ -1,44 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1566304014">
-  <project timestamp="1566304014">
+<coverage generated="1566307009">
+  <project timestamp="1566307009">
     <package name="ContributorsPlugin\Controllers">
       <file name="/var/www/html/wpblog1/wp-content/plugins/contributors/inc/Controllers/MetaboxController.php">
         <class name="ContributorsPlugin\Controllers\MetaboxController" namespace="ContributorsPlugin\Controllers">
-          <metrics complexity="23" methods="9" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="64" coveredstatements="39" elements="73" coveredelements="43"/>
+          <metrics complexity="24" methods="9" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="64" coveredstatements="52" elements="73" coveredelements="57"/>
         </class>
-        <line num="17" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="2"/>
-        <line num="19" type="stmt" count="2"/>
-        <line num="20" type="stmt" count="2"/>
-        <line num="21" type="stmt" count="2"/>
-        <line num="22" type="stmt" count="2"/>
-        <line num="28" type="method" name="addActions" visibility="public" complexity="1" crap="1" count="2"/>
-        <line num="30" type="stmt" count="2"/>
-        <line num="31" type="stmt" count="2"/>
-        <line num="32" type="stmt" count="2"/>
-        <line num="33" type="stmt" count="2"/>
-        <line num="40" type="method" name="saveMetaData" visibility="public" complexity="5" crap="5.03" count="2"/>
-        <line num="43" type="stmt" count="2"/>
-        <line num="44" type="stmt" count="2"/>
-        <line num="45" type="stmt" count="2"/>
-        <line num="47" type="stmt" count="2"/>
-        <line num="48" type="stmt" count="2"/>
-        <line num="50" type="stmt" count="2"/>
-        <line num="51" type="stmt" count="2"/>
+        <line num="17" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="3"/>
+        <line num="19" type="stmt" count="3"/>
+        <line num="20" type="stmt" count="3"/>
+        <line num="21" type="stmt" count="3"/>
+        <line num="22" type="stmt" count="3"/>
+        <line num="28" type="method" name="addActions" visibility="public" complexity="1" crap="1" count="3"/>
+        <line num="30" type="stmt" count="3"/>
+        <line num="31" type="stmt" count="3"/>
+        <line num="32" type="stmt" count="3"/>
+        <line num="33" type="stmt" count="3"/>
+        <line num="40" type="method" name="saveMetaData" visibility="public" complexity="5" crap="5.03" count="3"/>
+        <line num="43" type="stmt" count="3"/>
+        <line num="44" type="stmt" count="3"/>
+        <line num="45" type="stmt" count="3"/>
+        <line num="47" type="stmt" count="3"/>
+        <line num="48" type="stmt" count="3"/>
+        <line num="50" type="stmt" count="3"/>
+        <line num="51" type="stmt" count="3"/>
         <line num="53" type="stmt" count="0"/>
-        <line num="56" type="stmt" count="2"/>
-        <line num="62" type="method" name="autosaveCheck" visibility="protected" complexity="3" crap="3.33" count="2"/>
-        <line num="63" type="stmt" count="2"/>
+        <line num="56" type="stmt" count="3"/>
+        <line num="62" type="method" name="autosaveCheck" visibility="protected" complexity="3" crap="3.33" count="3"/>
+        <line num="63" type="stmt" count="3"/>
         <line num="64" type="stmt" count="0"/>
-        <line num="66" type="stmt" count="2"/>
-        <line num="74" type="method" name="havePermission" visibility="protected" complexity="4" crap="4.25" count="2"/>
-        <line num="76" type="stmt" count="2"/>
-        <line num="77" type="stmt" count="2"/>
-        <line num="80" type="stmt" count="2"/>
-        <line num="81" type="stmt" count="2"/>
+        <line num="66" type="stmt" count="3"/>
+        <line num="74" type="method" name="havePermission" visibility="protected" complexity="4" crap="4.25" count="3"/>
+        <line num="76" type="stmt" count="3"/>
+        <line num="77" type="stmt" count="3"/>
+        <line num="80" type="stmt" count="3"/>
+        <line num="81" type="stmt" count="3"/>
         <line num="82" type="stmt" count="0"/>
-        <line num="85" type="stmt" count="2"/>
+        <line num="85" type="stmt" count="3"/>
         <line num="86" type="stmt" count="0"/>
-        <line num="88" type="stmt" count="2"/>
+        <line num="88" type="stmt" count="3"/>
         <line num="97" type="method" name="renderPostContributorsBox" visibility="public" complexity="2" crap="2" count="1"/>
         <line num="99" type="stmt" count="1"/>
         <line num="100" type="stmt" count="1"/>
@@ -65,21 +65,21 @@
         <line num="139" type="stmt" count="1"/>
         <line num="140" type="stmt" count="1"/>
         <line num="144" type="stmt" count="1"/>
-        <line num="152" type="method" name="renderPost" visibility="public" complexity="3" crap="12.00" count="0"/>
-        <line num="153" type="stmt" count="0"/>
-        <line num="154" type="stmt" count="0"/>
-        <line num="155" type="stmt" count="0"/>
-        <line num="156" type="stmt" count="0"/>
-        <line num="157" type="stmt" count="0"/>
-        <line num="158" type="stmt" count="0"/>
-        <line num="159" type="stmt" count="0"/>
-        <line num="160" type="stmt" count="0"/>
-        <line num="161" type="stmt" count="0"/>
-        <line num="162" type="stmt" count="0"/>
-        <line num="163" type="stmt" count="0"/>
-        <line num="166" type="stmt" count="0"/>
-        <line num="167" type="stmt" count="0"/>
-        <metrics loc="170" ncloc="118" classes="1" methods="9" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="64" coveredstatements="39" elements="73" coveredelements="43"/>
+        <line num="152" type="method" name="renderPost" visibility="public" complexity="4" crap="4" count="1"/>
+        <line num="153" type="stmt" count="1"/>
+        <line num="154" type="stmt" count="1"/>
+        <line num="155" type="stmt" count="1"/>
+        <line num="156" type="stmt" count="1"/>
+        <line num="157" type="stmt" count="1"/>
+        <line num="158" type="stmt" count="1"/>
+        <line num="159" type="stmt" count="1"/>
+        <line num="160" type="stmt" count="1"/>
+        <line num="161" type="stmt" count="1"/>
+        <line num="162" type="stmt" count="1"/>
+        <line num="163" type="stmt" count="1"/>
+        <line num="166" type="stmt" count="1"/>
+        <line num="167" type="stmt" count="1"/>
+        <metrics loc="170" ncloc="118" classes="1" methods="9" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="64" coveredstatements="52" elements="73" coveredelements="57"/>
       </file>
     </package>
     <package name="ContributorsPlugin\Exception">
@@ -87,10 +87,10 @@
         <class name="ContributorsPlugin\Exception\MyException" namespace="ContributorsPlugin\Exception" fullPackage="Exception" package="Exception">
           <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="4" coveredelements="4"/>
         </class>
-        <line num="18" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="2"/>
-        <line num="20" type="stmt" count="2"/>
-        <line num="21" type="stmt" count="2"/>
-        <line num="22" type="stmt" count="2"/>
+        <line num="18" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="3"/>
+        <line num="20" type="stmt" count="3"/>
+        <line num="21" type="stmt" count="3"/>
+        <line num="22" type="stmt" count="3"/>
         <metrics loc="23" ncloc="12" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="4" coveredelements="4"/>
       </file>
     </package>
@@ -99,27 +99,27 @@
         <class name="ContributorsPlugin\View\TemplateRender" namespace="ContributorsPlugin\View">
           <metrics complexity="7" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="16" coveredstatements="13" elements="18" coveredelements="13"/>
         </class>
-        <line num="22" type="method" name="__construct" visibility="public" complexity="2" crap="2.03" count="3"/>
-        <line num="24" type="stmt" count="3"/>
+        <line num="22" type="method" name="__construct" visibility="public" complexity="2" crap="2.03" count="4"/>
+        <line num="24" type="stmt" count="4"/>
         <line num="25" type="stmt" count="0"/>
-        <line num="27" type="stmt" count="3"/>
-        <line num="28" type="stmt" count="3"/>
-        <line num="29" type="stmt" count="3"/>
-        <line num="37" type="method" name="render" visibility="public" complexity="5" crap="5.15" count="2"/>
-        <line num="39" type="stmt" count="2"/>
+        <line num="27" type="stmt" count="4"/>
+        <line num="28" type="stmt" count="4"/>
+        <line num="29" type="stmt" count="4"/>
+        <line num="37" type="method" name="render" visibility="public" complexity="5" crap="5.15" count="3"/>
+        <line num="39" type="stmt" count="3"/>
         <line num="40" type="stmt" count="0"/>
         <line num="41" type="stmt" count="0"/>
-        <line num="44" type="stmt" count="2"/>
-        <line num="45" type="stmt" count="2"/>
-        <line num="46" type="stmt" count="2"/>
-        <line num="49" type="stmt" count="2"/>
-        <line num="50" type="stmt" count="2"/>
-        <line num="51" type="stmt" count="2"/>
-        <line num="52" type="stmt" count="2"/>
-        <line num="53" type="stmt" count="2"/>
+        <line num="44" type="stmt" count="3"/>
+        <line num="45" type="stmt" count="3"/>
+        <line num="46" type="stmt" count="3"/>
+        <line num="49" type="stmt" count="3"/>
+        <line num="50" type="stmt" count="3"/>
+        <line num="51" type="stmt" count="3"/>
+        <line num="52" type="stmt" count="3"/>
+        <line num="53" type="stmt" count="3"/>
         <metrics loc="55" ncloc="36" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="16" coveredstatements="13" elements="18" coveredelements="13"/>
       </file>
     </package>
-    <metrics files="3" loc="248" ncloc="166" classes="3" methods="12" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="83" coveredstatements="55" elements="95" coveredelements="60"/>
+    <metrics files="3" loc="248" ncloc="166" classes="3" methods="12" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="83" coveredstatements="68" elements="95" coveredelements="74"/>
   </project>
 </coverage>
