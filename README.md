@@ -1,5 +1,4 @@
-# wp-post-contributors
-Wordpress plugin to add contributors list to the post.
+
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/zalevsk1y/wp-post-contributors/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/zalevsk1y/wp-post-contributors/?branch=master)  [![Code Coverage](https://scrutinizer-ci.com/g/zalevsk1y/wp-post-contributors/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/zalevsk1y/wp-post-contributors/?branch=master)  [![Build Status](https://scrutinizer-ci.com/g/zalevsk1y/wp-post-contributors/badges/build.png?b=master)](https://scrutinizer-ci.com/g/zalevsk1y/wp-post-contributors/build-status/master)
 
 # Wordpress Plugin wp-post-contributors 
