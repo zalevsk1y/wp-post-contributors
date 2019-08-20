@@ -10,6 +10,7 @@ class MetaboxControllerTest extends \WP_UnitTestCase
     public $users = [];
     public $controller;
     public $postId;
+    public $post;
     public $contributors = [1, 6];
     public function setUp()
     {
@@ -31,6 +32,7 @@ class MetaboxControllerTest extends \WP_UnitTestCase
         $nonce = wp_create_nonce(CONTRIBUTORS_PLUGIN_NONCE_ACTION);
         $_POST[CONTRIBUTORS_PLUGIN_NONCE] = $nonce;
         $_POST[CONTRIBUTORS_PLUGIN_FIELD] = $this->contributors;
+        
         do_action('save_post', $this->postId);
     }
     public function testSaveMetaData()
@@ -47,11 +49,19 @@ class MetaboxControllerTest extends \WP_UnitTestCase
         $this->assertMatchesSnapshot($metabox);
     }
     public function testRenderPost()
-    {
+    {   
         $post = get_post($this->postId);
-        setup_postdata($GLOBALS['post']=&$post);
+        setup_postdata($GLOBALS['post']=$post);
         $content = $this->controller->renderPost('');
         $this->assertMatchesSnapshot($content);
+    }
+    public function testAddContributorBox(){
+        do_action('add_meta_boxes');
+        ob_start();
+        do_meta_boxes('post','side',get_post($this->postId));
+        $metabox = ob_get_contents();
+        ob_end_clean();
+        $this->assertMatchesSnapshot($metabox);
     }
 
 }
