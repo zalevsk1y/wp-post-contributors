@@ -2,7 +2,7 @@
 namespace ContributorsPlugin\Controllers;
 
 use ContributorsPlugin\View\TemplateRender;
-
+use ContributorsPlugin\Exception\MyException;
 /**
  * Class manage metabox functions 
  *
@@ -39,12 +39,10 @@ class MetaboxController
      */
     public function saveMetaData($post_id)
     {
-        if (!$this->havePermission($post_id)) {
-            return $post_id;
-        }
-
-        if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
-            return $post_id;
+        try{
+            $this->autosaveCheck()->havePermission($post_id);
+        }catch(MyException $e){
+            return $e->getMessage();
         }
         if (isset($_POST[CONTRIBUTORS_PLUGIN_FIELD])) {
             $contributors = sanitize_meta(CONTRIBUTORS_PLUGIN_META, $_POST[CONTRIBUTORS_PLUGIN_FIELD], 'post');
@@ -57,26 +55,37 @@ class MetaboxController
         }
     }
     /**
+     * Check is save action is autosave
+     *
+     * @return object $this for chain building
+     */
+    protected function autosaveCheck(){
+        if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+            throw new MyException('Autosave');
+        }
+        return $this;
+    }
+    /**
      * Check if user have permission to modify post 
      *
      * @param int $post_id
-     * @return bool
+     * @return object $this for chain building
      */
     protected function havePermission($post_id)
     {
         if (!isset($_POST[CONTRIBUTORS_PLUGIN_NONCE])) {
-            return false;
+            throw new MyException(__('Nonce field did not set.',CONTRIBUTORS_PLUGIN_SLUG));
         }
 
         $nonce = $_POST[CONTRIBUTORS_PLUGIN_NONCE];
         if (!wp_verify_nonce($nonce, CONTRIBUTORS_PLUGIN_NONCE_ACTION)) {
-            return false;
+            throw new MyException(__('Nonce is not verified',CONTRIBUTORS_PLUGIN_SLUG));
         }
 
         if (!current_user_can('edit_post', $post_id)) {
-            return false;
+            throw new MyException(__('You have no rights to edit this post',CONTRIBUTORS_PLUGIN_SLUG));
         }
-        return true;
+        return $this;
 
     }
     /**
