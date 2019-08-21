@@ -27,7 +27,7 @@ define("CONTRIBUTORS_PLUGIN_FIELD", "wp_contributors_plugin_value");
 define("CONTRIBUTORS_PLUGIN_META", "_wp_contributors_plugin");
 
 require_once "autoload.php";
-$adminTemplatePath = apply_filters("contributors_plugin_admin_template", CONTRIBUTORS_PLUGIN_DIR . "/templates/contributors-plugin-admin-template.php");
+$adminTemplatePath =  CONTRIBUTORS_PLUGIN_DIR . "/templates/contributors-plugin-admin-template.php";
 $postTemplatePath = apply_filters("contributors_plugin_post_template", CONTRIBUTORS_PLUGIN_DIR . "/templates/contributors-plugin-post-template.php");
 $modules = [];
 $modules["adminTemplate"] = new View\TemplateRender($adminTemplatePath);
