@@ -3,8 +3,9 @@ namespace ContributorsPlugin\Controllers;
 
 use ContributorsPlugin\View\TemplateRender;
 use ContributorsPlugin\Exception\MyException;
+
 /**
- * Class manage metabox functions 
+ * Class manage metabox functions
  *
  * @package Menu
  * @author  Evgeniy S.Zalevskiy <2600@ukr.net>
@@ -12,36 +13,37 @@ use ContributorsPlugin\Exception\MyException;
  */
 
 class MetaboxController
-{   protected $postTemplate;
+{
+    protected $postTemplate;
     protected $adminTemplate;
-    public function __construct(TemplateRender $adminTemplate,TemplateRender $postTemplate)
+    public function __construct(TemplateRender $adminTemplate, TemplateRender $postTemplate)
     {
         $this->adminTemplate = $adminTemplate;
         $this->postTemplate = $postTemplate;
         $this->addActions();
     }
     /**
-     * Add WP actions 
+     * Add WP actions
      *
      * @return void
      */
     public function addActions()
     {
         \add_action('save_post', array($this, 'saveMetaData'));
-        \add_action('the_content',array($this,'renderPost'));
+        \add_action('the_content', array($this,'renderPost'));
         \add_action('add_meta_boxes', array($this, 'addContributorsBox'));
     }
     /**
      *  Save contributors data to post meta
      *
-     * @param int $post_id 
+     * @param int $post_id
      * @return void
      */
     public function saveMetaData($post_id)
     {
-        try{
+        try {
             $this->autosaveCheck()->havePermission($post_id);
-        }catch(MyException $e){
+        } catch (MyException $e) {
             return $e->getMessage();
         }
         if (isset($_POST[CONTRIBUTORS_PLUGIN_FIELD])) {
@@ -59,14 +61,15 @@ class MetaboxController
      *
      * @return object $this for chain building
      */
-    protected function autosaveCheck(){
+    protected function autosaveCheck()
+    {
         if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
             throw new MyException('Autosave');
         }
         return $this;
     }
     /**
-     * Check if user have permission to modify post 
+     * Check if user have permission to modify post
      *
      * @param int $post_id
      * @return object $this for chain building
@@ -74,19 +77,18 @@ class MetaboxController
     protected function havePermission($post_id)
     {
         if (!isset($_POST[CONTRIBUTORS_PLUGIN_NONCE])) {
-            throw new MyException(__('Nonce field did not set.',CONTRIBUTORS_PLUGIN_SLUG));
+            throw new MyException(__('Nonce field did not set.', CONTRIBUTORS_PLUGIN_SLUG));
         }
 
         $nonce = $_POST[CONTRIBUTORS_PLUGIN_NONCE];
         if (!wp_verify_nonce($nonce, CONTRIBUTORS_PLUGIN_NONCE_ACTION)) {
-            throw new MyException(__('Nonce is not verified',CONTRIBUTORS_PLUGIN_SLUG));
+            throw new MyException(__('Nonce is not verified', CONTRIBUTORS_PLUGIN_SLUG));
         }
 
         if (!current_user_can('edit_post', $post_id)) {
-            throw new MyException(__('You have no rights to edit this post',CONTRIBUTORS_PLUGIN_SLUG));
+            throw new MyException(__('You have no rights to edit this post', CONTRIBUTORS_PLUGIN_SLUG));
         }
         return $this;
-
     }
     /**
      * Render view for post-edit page that allow to add and remove contributors
@@ -106,7 +108,7 @@ class MetaboxController
         echo $this->adminTemplate->render($args);
     }
     /**
-     * Add metabox "Contributors" to "post_author_meta".Used in add action 
+     * Add metabox "Contributors" to "post_author_meta".Used in add action
      *
      * @return void
      */
@@ -149,22 +151,26 @@ class MetaboxController
      * @param string $content post content
      * @return string
      */
-    public function renderPost($content){
-        $meta_data = get_post_meta(get_the_ID() , CONTRIBUTORS_PLUGIN_META, true );
-        if($meta_data == '') return $content;
-        $contributors = explode( ",", $meta_data );
+    public function renderPost($content)
+    {
+        $meta_data = get_post_meta(get_the_ID(), CONTRIBUTORS_PLUGIN_META, true);
+        if ($meta_data == '') {
+            return $content;
+        }
+        $contributors = explode(",", $meta_data);
         $user_data=[];
-        foreach ($contributors as $contributor){
-            $contributor_data =get_userdata( $contributor );
-            if(!$contributor_data) continue;
+        foreach ($contributors as $contributor) {
+            $contributor_data =get_userdata($contributor);
+            if (!$contributor_data) {
+                continue;
+            }
             $user_data[] =(object)array(
-              'nickname'=>esc_html( $contributor_data->nickname ),
-               'link'=>esc_url(get_author_posts_url( $contributor_data->ID )),
-               'avatar_tag'=>get_avatar( $contributor, 40 )
-            ); 
+              'nickname'=>esc_html($contributor_data->nickname),
+               'link'=>esc_url(get_author_posts_url($contributor_data->ID)),
+               'avatar_tag'=>get_avatar($contributor, 40)
+            );
         }
         $contributors_box=$this->postTemplate->render(array('contributors'=>$user_data));
         return $content.$contributors_box;
-		
     }
 }

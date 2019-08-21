@@ -17,7 +17,6 @@ class Main
     {
 
         $this->addActions();
-
     }
     /**
      * Add wp action hook
@@ -30,20 +29,17 @@ class Main
         add_action('admin_enqueue_scripts', array($this, 'setStyles'));
     }
     /**
-     * Add styles 
+     * Add styles
      *
-     * @param string $hook 
+     * @param string $hook
      * @return void
      */
     public function setStyles($hook)
     {
         if ($hook == 'post.php') {
-
             \wp_enqueue_style(CONTRIBUTORS_PLUGIN_SLUG . '-style', CONTRIBUTORS_PLUGIN_URL . '/public/css/plugin-custom-styles.css');
             \wp_enqueue_style(CONTRIBUTORS_PLUGIN_SLUG . '-fonts', CONTRIBUTORS_PLUGIN_URL . '/public/css/font.css');
             wp_enqueue_script(CONTRIBUTORS_PLUGIN_SLUG . '-script', CONTRIBUTORS_PLUGIN_URL . '/public/js/contributor-script.js');
         }
-
     }
-
 }

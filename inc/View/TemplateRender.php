@@ -3,7 +3,7 @@
 namespace ContributorsPlugin\View;
 
 /**
- * Class loading template file and render it with args. Args is not is not escaping, 
+ * Class loading template file and render it with args. Args is not is not escaping,
  * so please escape them in template or before passing to TemplateRender
  *
  * @author  Evgeniy S.Zalevskiy <2600@ukr.net>
@@ -14,12 +14,12 @@ class TemplateRender
     protected $path;
     protected $args;
     /**
-     * Init function 
+     * Init function
      *
-     * @param string $template_path path to template 
+     * @param string $template_path path to template
      * @param array $args array of args that need to be add to template
      */
-    public function __construct($template_path,$args = [])
+    public function __construct($template_path, $args = [])
     {
         if (!file_exists($template_path)) {
             throw new \Exception('Cannot load template file ' . $template_path);
