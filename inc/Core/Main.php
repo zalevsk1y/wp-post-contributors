@@ -4,6 +4,8 @@ namespace ContributorsPlugin\Core;
 /**
  * Class add
  *
+ * PHP version 5.6
+ *
  * @package Menu
  * @author  Evgeniy S.Zalevskiy <2600@ukr.net>
  * @license MIT
@@ -11,8 +13,7 @@ namespace ContributorsPlugin\Core;
 
 class Main
 {
-    protected $sreen = 'post';
-    protected $metabox;
+    
     public function __construct()
     {
 

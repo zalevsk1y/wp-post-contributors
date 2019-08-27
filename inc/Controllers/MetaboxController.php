@@ -1,11 +1,13 @@
 <?php
 namespace ContributorsPlugin\Controllers;
 
-use ContributorsPlugin\View\TemplateRender;
 use ContributorsPlugin\Exception\MyException;
+use ContributorsPlugin\View\TemplateRender;
 
 /**
- * Class manage metabox functions
+ * Class manage metabox functions.
+ *
+ * PHP version 5.6
  *
  * @package Menu
  * @author  Evgeniy S.Zalevskiy <2600@ukr.net>
@@ -14,7 +16,17 @@ use ContributorsPlugin\Exception\MyException;
 
 class MetaboxController
 {
+    /**
+     * Template file path for post contributors box template
+     *
+     * @var Contributors_Plugin_Template_Render
+     */
     protected $postTemplate;
+    /**
+     * Template file path for admin select contributors box template
+     *
+     * @var Contributors_Plugin_Template_Render
+     */
     protected $adminTemplate;
     public function __construct(TemplateRender $adminTemplate, TemplateRender $postTemplate)
     {
@@ -23,20 +35,20 @@ class MetaboxController
         $this->addActions();
     }
     /**
-     * Add WP actions
+     * Add WP actions.
      *
      * @return void
      */
     public function addActions()
     {
         \add_action('save_post', array($this, 'saveMetaData'));
-        \add_action('the_content', array($this,'renderPost'));
+        \add_action('the_content', array($this, 'renderPost'));
         \add_action('add_meta_boxes', array($this, 'addContributorsBox'));
     }
     /**
-     *  Save contributors data to post meta
+     *  Save contributors data to post meta.
      *
-     * @param int $post_id
+     * @param int $post_id Id of post.
      * @return void
      */
     public function saveMetaData($post_id)
@@ -49,7 +61,7 @@ class MetaboxController
         if (isset($_POST[CONTRIBUTORS_PLUGIN_FIELD])) {
             $contributors = sanitize_meta(CONTRIBUTORS_PLUGIN_META, $_POST[CONTRIBUTORS_PLUGIN_FIELD], 'post');
 
-            if (isset($contributors) && $contributors != '') {
+            if (isset($contributors) && '' !== $contributors) {
                 update_post_meta($post_id, CONTRIBUTORS_PLUGIN_META, implode(",", $contributors));
             } else {
                 update_post_meta($post_id, CONTRIBUTORS_PLUGIN_META, '');
@@ -79,7 +91,7 @@ class MetaboxController
         if (!isset($_POST[CONTRIBUTORS_PLUGIN_NONCE])) {
             throw new MyException(__('Nonce field did not set.', CONTRIBUTORS_PLUGIN_SLUG));
         }
-
+        // there is no need to sanitize nonce data because nonce verification is simple a String comparison
         $nonce = $_POST[CONTRIBUTORS_PLUGIN_NONCE];
         if (!wp_verify_nonce($nonce, CONTRIBUTORS_PLUGIN_NONCE_ACTION)) {
             throw new MyException(__('Nonce is not verified', CONTRIBUTORS_PLUGIN_SLUG));
@@ -104,7 +116,7 @@ class MetaboxController
             $contributorsIds = explode(',', $contributorsIds);
             $args['contributors'] = $this->getContributorsData($contributorsIds);
         }
-        
+
         echo $this->adminTemplate->render($args);
     }
     /**
@@ -135,7 +147,7 @@ class MetaboxController
     {
         $contributors = array();
         foreach ($contributorsId as $id) {
-            $user=\get_userdata(intval($id));
+            $user = \get_userdata(intval($id));
             if ($user) {
                 $contributors[] = (object) array(
                     'ID' => $user->ID,
@@ -158,19 +170,19 @@ class MetaboxController
             return $content;
         }
         $contributors = explode(",", $meta_data);
-        $user_data=[];
+        $user_data = [];
         foreach ($contributors as $contributor) {
-            $contributor_data =get_userdata($contributor);
+            $contributor_data = get_userdata($contributor);
             if (!$contributor_data) {
                 continue;
             }
-            $user_data[] =(object)array(
-              'nickname'=>esc_html($contributor_data->nickname),
-               'link'=>esc_url(get_author_posts_url($contributor_data->ID)),
-               'avatar_tag'=>get_avatar($contributor, 40)
+            $user_data[] = (object) array(
+                'nickname' => esc_html($contributor_data->nickname),
+                'link' => esc_url(get_author_posts_url($contributor_data->ID)),
+                'avatar_tag' => get_avatar($contributor, 40),
             );
         }
-        $contributors_box=$this->postTemplate->render(array('contributors'=>$user_data));
-        return $content.$contributors_box;
+        $contributors_box = $this->postTemplate->render(array('contributors' => $user_data));
+        return $content . $contributors_box;
     }
 }
