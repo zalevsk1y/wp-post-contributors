@@ -3,6 +3,11 @@
 
 # Wordpress Plugin wp-post-contributors 
 
+This plugin follows the PSR standard. I think that you shouldn`t follow Wordpress Coding Standards unless you’re doing core development. And here are my arguments:
+*   To date, over 60 plugins have been created and not using namespase is not possible. And to use the namespace other then PSR-4 standard is very unnatural for me :smile:.
+*   I am a fullstack developer and use the camelCase  for me very comfortable, camelCase easier to read, takes up less space and looks less out of place among code.
+*   IMHO if you’re writing modern PHP, I think the following WPCS will lead to code of a lower quality.
+
 The plugin allows you to select users from the list and mark them as post-contributors. After saving, data about the contributors will be displayed at the bottom of the post. You can use the `contributors_plugin_post_template` filter
 which allows you to change the path to the template. This will be useful when using this plugin with various themes.
 
