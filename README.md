@@ -4,7 +4,7 @@
 # Wordpress Plugin wp-post-contributors 
 Here is the [link](https://github.com/zalevsk1y/wp-post-contributors-wpcs) to the same plugin, but wrote follow WP Coding Standards.
 This plugin follows the PSR standard. I think that you shouldn`t follow Wordpress Coding Standards unless you’re doing core development. And here are my arguments:
-*   To date, over 60 plugins have been created and not using namespase is not possible. And to use the namespace other then PSR-4 standard is very unnatural for me :smile:.
+*   Over 60k plugins have been created and not using namespase is not possible. And to use the namespace other then PSR-4 standard is very unnatural for me :smile:.
 *   I am a fullstack developer and use the camelCase  for me very comfortable, camelCase easier to read, takes up less space and looks less out of place among code.
 *   IMHO if you’re writing modern PHP, I think the following WPCS will lead to code of a lower quality.
 
