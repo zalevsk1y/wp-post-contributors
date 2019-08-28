@@ -19,13 +19,13 @@ class MetaboxController
     /**
      * Template file path for post contributors box template
      *
-     * @var Contributors_Plugin_Template_Render
+     * @var ContributorsPlugin\View\TemplateRender
      */
     protected $postTemplate;
     /**
      * Template file path for admin select contributors box template
      *
-     * @var Contributors_Plugin_Template_Render
+     * @var ContributorsPlugin\View\TemplateRender
      */
     protected $adminTemplate;
     public function __construct(TemplateRender $adminTemplate, TemplateRender $postTemplate)
