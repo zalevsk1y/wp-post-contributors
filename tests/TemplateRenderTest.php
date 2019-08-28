@@ -4,7 +4,10 @@ use Spatie\Snapshots\MatchesSnapshots;
 
 class TemplateRendreTest extends \WP_UnitTestCase{
     use MatchesSnapshots;
-    public function testRender(){
+    public  function test_wrong_template_path(){
+
+    }
+    public function test_render(){
         $path=__DIR__.'/mock/testRenderMock.php';
         $template=new TemplateRender($path);
         $args=array(
