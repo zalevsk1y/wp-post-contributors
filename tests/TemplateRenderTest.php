@@ -5,7 +5,9 @@ use Spatie\Snapshots\MatchesSnapshots;
 class TemplateRendreTest extends \WP_UnitTestCase{
     use MatchesSnapshots;
     public  function test_wrong_template_path(){
-
+        $path=__DIR__.'/mock/wrongTemplatePath.php';
+        $this->setExpectedException(\Exception::class);
+        $template=new TemplateRender($path);
     }
     public function test_render(){
         $path=__DIR__.'/mock/testRenderMock.php';

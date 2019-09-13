@@ -3,7 +3,7 @@ namespace ContributorsPlugin\Controllers;
 
 use ContributorsPlugin\Exception\MyException;
 use ContributorsPlugin\View\TemplateRender;
-
+use ContributorsPlugin\Utils\ChainController;
 /**
  * Class manage metabox functions.
  *
@@ -49,14 +49,15 @@ class MetaboxController
      *  Save contributors data to post meta.
      *
      * @param int $post_id Id of post.
-     * @return void
+     * @return void|string
      */
     public function saveMetaData($post_id)
     {
-        try {
-            $this->autosaveCheck()->havePermission($post_id);
-        } catch (MyException $e) {
-            return $e->getMessage();
+        $result_of_check=$this->chain($this)
+                            ->autosaveCheck()
+                            ->havePermission($post_id);
+        if(is_wp_error($result_of_check)){
+            return $result_of_check->get_error_message();
         }
         if (isset($_POST[CONTRIBUTORS_PLUGIN_FIELD])) {
             $contributors = sanitize_meta(CONTRIBUTORS_PLUGIN_META, $_POST[CONTRIBUTORS_PLUGIN_FIELD], 'post');
@@ -73,12 +74,12 @@ class MetaboxController
      *
      * @return object $this for chain building
      */
-    protected function autosaveCheck()
+    public function autosaveCheck()
     {
         if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
-            throw new MyException('Autosave');
+            return new \WP_Error(__('Doing autosave.',CONTRIBUTORS_PLUGIN_SLUG));
         }
-        return $this;
+        return false;
     }
     /**
      * Check if user have permission to modify post
@@ -86,21 +87,22 @@ class MetaboxController
      * @param int $post_id
      * @return object $this for chain building
      */
-    protected function havePermission($post_id)
+    public function havePermission($post_id)
     {
         if (!isset($_POST[CONTRIBUTORS_PLUGIN_NONCE])) {
-            throw new MyException(__('Nonce field did not set.', CONTRIBUTORS_PLUGIN_SLUG));
+            return new \WP_Error(__('Nonce field did not set.',CONTRIBUTORS_PLUGIN_SLUG));
         }
         // there is no need to sanitize nonce data because nonce verification is simple a String comparison
         $nonce = $_POST[CONTRIBUTORS_PLUGIN_NONCE];
         if (!wp_verify_nonce($nonce, CONTRIBUTORS_PLUGIN_NONCE_ACTION)) {
-            throw new MyException(__('Nonce is not verified', CONTRIBUTORS_PLUGIN_SLUG));
+            return new \WP_Error(__('Nonce is not verified.',CONTRIBUTORS_PLUGIN_SLUG));
         }
 
         if (!current_user_can('edit_post', $post_id)) {
-            throw new MyException(__('You have no rights to edit this post', CONTRIBUTORS_PLUGIN_SLUG));
+            return new \WP_Error(__('You have no rights to edit this post.',CONTRIBUTORS_PLUGIN_SLUG));
+            
         }
-        return $this;
+        return false;
     }
     /**
      * Render view for post-edit page that allow to add and remove contributors
@@ -184,5 +186,17 @@ class MetaboxController
         }
         $contributors_box = $this->postTemplate->render(array('contributors' => $user_data));
         return $content . $contributors_box;
+    }
+    /**
+    * Facade for chain building class. use NewsParserPlugin\::get() function at the end to get result.
+    *
+    * @param object|null object which methods will be called in chain.
+    * 
+    * @return object ChainController
+    */
+    protected function chain($object=null)
+    {
+        $object=is_null($object)?$this:$object;
+        return new ChainController($object);
     }
 }
