@@ -3,7 +3,7 @@ namespace ContributorsPlugin\Controllers;
 
 use ContributorsPlugin\Exception\MyException;
 use ContributorsPlugin\View\TemplateRender;
-use ContributorsPlugin\Utils\ChainController;
+
 /**
  * Class manage metabox functions.
  *
@@ -53,11 +53,9 @@ class MetaboxController
      */
     public function saveMetaData($post_id)
     {
-        $result_of_check=$this->chain($this)
-                            ->autosaveCheck()
-                            ->havePermission($post_id);
-        if(is_wp_error($result_of_check)){
-            return $result_of_check->get_error_message();
+        $result_of_permission_check=$this->havePermission($post_id);
+        if($this->autosaveCheck()||is_wp_error($result_of_permission_check)){
+            return ;
         }
         if (isset($_POST[CONTRIBUTORS_PLUGIN_FIELD])) {
             $contributors = sanitize_meta(CONTRIBUTORS_PLUGIN_META, $_POST[CONTRIBUTORS_PLUGIN_FIELD], 'post');
@@ -72,12 +70,12 @@ class MetaboxController
     /**
      * Check is save action is autosave
      *
-     * @return object $this for chain building
+     * @return bool 
      */
     public function autosaveCheck()
     {
         if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
-            return new \WP_Error(__('Doing autosave.',CONTRIBUTORS_PLUGIN_SLUG));
+            return true;
         }
         return false;
     }
@@ -186,17 +184,5 @@ class MetaboxController
         }
         $contributors_box = $this->postTemplate->render(array('contributors' => $user_data));
         return $content . $contributors_box;
-    }
-    /**
-    * Facade for chain building class. use NewsParserPlugin\::get() function at the end to get result.
-    *
-    * @param object|null object which methods will be called in chain.
-    * 
-    * @return object ChainController
-    */
-    protected function chain($object=null)
-    {
-        $object=is_null($object)?$this:$object;
-        return new ChainController($object);
     }
 }
